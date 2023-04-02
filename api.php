@@ -434,7 +434,7 @@ function quebrar_url($request){
 
     $i = 0;
     foreach($aux as $a => $v){
-        if(!$v == "api" || !$v == "api.php"){
+        if(!$v == ""){
             $url[$i] = $v;
             $i += 1;
         }
