@@ -20,6 +20,10 @@ if($request_method == "GET"){
     // Separa a url
     $url = quebrar_url($request_url);
 
+    var_dump($url);
+
+    return;
+
     if($url[0] == "usuarios") {
         echo json_encode(get_all_usuarios(), JSON_PRETTY_PRINT);
         return;
@@ -430,7 +434,7 @@ function quebrar_url($request){
 
     $i = 0;
     foreach($aux as $a => $v){
-        if(!$v == ""){
+        if(!$v == "api" || !$v == "api.php"){
             $url[$i] = $v;
             $i += 1;
         }
