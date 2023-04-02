@@ -219,9 +219,7 @@ if($request_method == "GET"){
         echo $response;
         return;
     }
-}
-
-function error($message){
+}function error($message){
     global $api_message;
 
     $api_message["response"] = $message;
@@ -435,6 +433,7 @@ function quebrar_url($request){
     foreach($aux as $a => $v){
         if($i > 2) $url[] = $v;
         $i += 1;
+
     }
 
     return $url;
