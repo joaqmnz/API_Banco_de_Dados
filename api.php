@@ -434,7 +434,7 @@ function quebrar_url($request){
 
     $i = 0;
     foreach($aux as $a => $v){
-        if($i > 2) $url[$i] = $v;
+        if($i > 2) $url[] = $v;
         $i += 1;
     }
 
