@@ -118,6 +118,8 @@ if($request_method == "GET"){
     }
 
     if(strcmp($request_url, "/api/api.php/usuario/cadastro") == 0){
+        echo __DIR__;
+        return;
         $arquivo = json_decode(file_get_contents(__DIR__ . "/jsons/usuarios.json"));
         $input = json_decode(file_get_contents("php://input"));
         if(empty($arquivo)){
