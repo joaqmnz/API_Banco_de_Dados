@@ -20,10 +20,6 @@ if($request_method == "GET"){
     // Separa a url
     $url = quebrar_url($request_url);
 
-    var_dump($url);
-
-    return;
-
     if($url[0] == "usuarios") {
         echo json_encode(get_all_usuarios(), JSON_PRETTY_PRINT);
         return;
