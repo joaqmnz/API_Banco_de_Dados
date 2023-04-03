@@ -93,11 +93,11 @@ if($request_method == "GET"){
     if(strpos($url[1], "-")){
         $data = $url[1];
         $response = get_usuario_by_data($data);
-        echo json_encode($response);
+        echo json_encode($response, JSON_PRETTY_PRINT);
     } else{
         $nome = $url[1];
         $response = get_nome($nome);
-        echo json_encode($response);
+        echo json_encode($response, JSON_PRETTY_PRINT);
     }
     
 } else if($request_method == "POST"){
@@ -118,11 +118,11 @@ if($request_method == "GET"){
     }
 
     if(strcmp($request_url, "/api/api.php/usuario/cadastro") == 0){
-        $arquivo = __DIR__ . "/jsons/usuarios.json";
+        $nome_arquivo = "./jsons/usuarios.json";
         $input = json_decode(file_get_contents("php://input"));
 
-        if(!file_exists($arquivo)){
-            $file = fopen(__DIR__ . "/jsons/usuarios.json", "w");
+        if(!file_exists($nome_arquivo)){
+            $file = fopen($arquivo, "a");
             fwrite($file, json_encode($input, JSON_PRETTY_PRINT));
             fclose($file);
 
@@ -197,7 +197,7 @@ if($request_method == "GET"){
     
         foreach($arquivo as $ar => $valor_ar) $adicionar[$ar] = $valor_ar;
 
-        $file = fopen(__DIR__ . "/jsons/usuarios.json", "w");
+        $file = fopen($nome_arquivo, "a");
         fwrite($file, json_encode($adicionar, JSON_PRETTY_PRINT));
         fclose($file);
     
