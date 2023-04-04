@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "API de Usuários",
+    "title": "API de Banco de Dados",
     "description": "API para cadastrar e listar usuários.",
     "version": "0.0.1",
     "contact": {
