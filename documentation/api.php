@@ -1,7 +1,6 @@
 <?php
-require("../vendor/autoload.php");
 
-$openapi = \OpenApi\Generator::scan([$_SERVER["DOCUMENT_ROOT"]."/api/models"]);
+$openapi = json_decode(file_get_contents(__DIR__ . "/openapi.json"));
 
-header('Content-Type: application/json');
-echo $openapi->toJson();
+
+echo json_encode($openapi, JSON_PRETTY_PRINT);

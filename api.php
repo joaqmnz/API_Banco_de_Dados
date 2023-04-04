@@ -61,7 +61,6 @@ if($request_method == "GET"){
             return;
         }
 
-        // Buscar cpf
         $cpf = $url[2];
         $response = get_usuario_by_cpf($cpf);
         
@@ -117,12 +116,12 @@ if($request_method == "GET"){
         return;
     }
 
-    if(strcmp($request_url, "/api/api.php/usuario/cadastro") == 0){
+    if(strcmp($request_url, "/api.php/usuario/cadastro") == 0){
         $nome_arquivo = "./jsons/usuarios.json";
         $input = json_decode(file_get_contents("php://input"));
 
         if(!file_exists($nome_arquivo)){
-            $file = fopen($arquivo, "a");
+            $file = fopen($nome_arquivo, "a");
             fwrite($file, json_encode($input, JSON_PRETTY_PRINT));
             fclose($file);
 
@@ -161,7 +160,7 @@ if($request_method == "GET"){
         $adicionar = [];
         $removidos = [];
 
-        $arquivo = json_decode(file_get_contents($arquivo));
+        $arquivo = json_decode(file_get_contents($nome_arquivo));
 
         $a = 0;
         $r = 0;
@@ -342,7 +341,6 @@ function get_all_usuarios(){
 }
 function get_usuario_by_cpf($cpf){
     $arquivo = json_decode(file_get_contents(__DIR__ . "/jsons/usuarios.json"));
-
     if(empty($arquivo)){
         return [
             "status" => "EMPTY",
@@ -350,7 +348,6 @@ function get_usuario_by_cpf($cpf){
             "query" => "Get_By_CPF"
         ];
     }
-
 
     $response = [];
     foreach($arquivo as $a => $valor){

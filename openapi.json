@@ -1,0 +1,432 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API de Usuários",
+    "description": "API para cadastrar e listar usuários.",
+    "version": "0.0.1",
+    "contact": {
+      "name": "Joaquim Luna",
+      "email": "joaquimluna522@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://34.203.240.140/api.php",
+      "description": "Servidor da API"
+    }
+  ],
+  "paths": {
+    "/usuario/cadastro": {
+      "post": {
+        "summary": "Cria um novo usuário",
+        "description": "Endpoint utilizado para criar um novo usuário na base de dados.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf_1": {
+                    "description": "CPF do usuario.",
+                    "type": "object",
+                    "properties": {
+                      "nome": {
+                        "type": "string",
+                        "description": "Nome do usuario"
+                      },
+                      "cpf_2": {
+                        "type": "integer",
+                        "description": "CPF do usuario"
+                      },
+                      "data_nascimento": {
+                        "type": "string",
+                        "description": "Data de nascimento, seguindo o padrao \"dd-mm-aaaa\""
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "nome",
+                  "cpf",
+                  "data_nascimento"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/usuarios": {
+      "get": {
+        "summary": "Lista todos os usuários",
+        "description": "Endpoint utilizado para listar todos os usuários cadastrados na base de dados.",
+        "responses": {
+          "200": {
+            "description": "Lista de usuários",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Retorna \"FIND\" se encontrou"
+                    },
+                    "cpf_1": {
+                      "description": "CPF do usuario.",
+                      "type": "object",
+                      "properties": {
+                        "nome": {
+                          "type": "string",
+                          "description": "Nome do usuario"
+                        },
+                        "cpf_2": {
+                          "type": "integer",
+                          "description": "CPF do usuario"
+                        },
+                        "data_nascimento": {
+                          "type": "string",
+                          "description": "Data de nascimento, seguindo o padrao \"dd-mm-aaaa\""
+                        }
+                      }
+                    },
+                    "size": {
+                      "type": "integer",
+                      "description": "Retorna quantos usuarios encontrou"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/usuario/nome/{nome}": {
+      "get": {
+        "summary": "Busca um usuário pelo nome",
+        "description": "Endpoint utilizado para buscar um usuário específico pelo seu nome.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nome",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Nome do usuário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Status da resposta"
+                    },
+                    "response": {
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "nome": {
+                            "type": "string",
+                            "description": "Nome do usuario"
+                          },
+                          "cpf": {
+                            "type": "integer",
+                            "description": "CPF do usuario"
+                          },
+                          "data_nascimento": {
+                            "type": "string",
+                            "description": "Data de nascimento, seguindo o padrao \"dd-mm-aaaa\""
+                          }
+                        }
+                      }
+                    },
+                    "query": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "Funcao chamada"
+                        },
+                        "value": {
+                          "type": "string",
+                          "description": "Valor passado"
+                        }
+                      }
+                    },
+                    "find": {
+                      "type": "string",
+                      "description": "Quantidade de pesquisa achadas"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/usuario/cpf/{cpf}": {
+      "get": {
+        "summary": "Busca um usuário pelo cpf",
+        "description": "Endpoint utilizado para buscar um usuário específico pelo seu cpf.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cpf",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "CPF do usuário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Status da resposta"
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "description": "Status da busca"
+                        },
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "nome": {
+                              "type": "string",
+                              "description": "Nome do usuario"
+                            },
+                            "cpf": {
+                              "type": "integer",
+                              "description": "CPF do usuario"
+                            },
+                            "data_nascimento": {
+                              "type": "string",
+                              "description": "Data de nascimento, seguindo o padrao \"dd-mm-aaaa\""
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "query": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "Funcao chamada"
+                        },
+                        "value": {
+                          "type": "string",
+                          "description": "Valor passado"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/usuario/{nome}": {
+      "get": {
+        "summary": "Retorna todos os usuarios que possuem {nome}",
+        "description": "Endpoint utilizado para buscar usuarios com {nome}.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nome",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Nome do usuário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Status da resposta"
+                    },
+                    "response": {
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "nome": {
+                            "type": "string",
+                            "description": "Nome do usuario"
+                          },
+                          "cpf": {
+                            "type": "integer",
+                            "description": "CPF do usuario"
+                          },
+                          "data_nascimento": {
+                            "type": "string",
+                            "description": "Data de nascimento, seguindo o padrao \"dd-mm-aaaa\""
+                          }
+                        }
+                      }
+                    },
+                    "query": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "Funcao chamada"
+                        },
+                        "value": {
+                          "type": "string",
+                          "description": "Valor passado"
+                        }
+                      }
+                    },
+                    "size": {
+                      "type": "integer",
+                      "description": "Quantidade de pesquisas achadas"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/usuario/{data_nascimento}": {
+      "get": {
+        "summary": "Retorna todos os usuarios que possuem {data_nascimento}",
+        "description": "Endpoint utilizado para buscar usuarios com {data_nascimento}.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "data_nascimento",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "data_nascimento do usuário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "Status da resposta"
+                    },
+                    "response": {
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "nome": {
+                            "type": "string",
+                            "description": "Nome do usuario"
+                          },
+                          "cpf": {
+                            "type": "integer",
+                            "description": "CPF do usuario"
+                          },
+                          "data_nascimento": {
+                            "type": "string",
+                            "description": "Data de nascimento, seguindo o padrao \"dd-mm-aaaa\""
+                          }
+                        }
+                      }
+                    },
+                    "query": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "Funcao chamada"
+                        },
+                        "value": {
+                          "type": "string",
+                          "description": "Valor passado"
+                        }
+                      }
+                    },
+                    "size": {
+                      "type": "integer",
+                      "description": "Quantidade de pesquisas achadas"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    }
+  }
+}
