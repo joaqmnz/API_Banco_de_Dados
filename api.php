@@ -121,7 +121,7 @@ if($request_method == "GET"){
         $input = json_decode(file_get_contents("php://input"));
 
         if(!file_exists($nome_arquivo)){
-            $file = fopen($nome_arquivo, "a");
+            $file = fopen($nome_arquivo, "w");
             fwrite($file, json_encode($input, JSON_PRETTY_PRINT));
             fclose($file);
 
@@ -196,7 +196,7 @@ if($request_method == "GET"){
     
         foreach($arquivo as $ar => $valor_ar) $adicionar[$ar] = $valor_ar;
 
-        $file = fopen($nome_arquivo, "a");
+        $file = fopen($nome_arquivo, "w");
         fwrite($file, json_encode($adicionar, JSON_PRETTY_PRINT));
         fclose($file);
     
