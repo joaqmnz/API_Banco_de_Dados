@@ -8,7 +8,7 @@ $root = $_SERVER["HTTP_HOST"];
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8">
-    <title>documentation</title>
+    <title>Documentação API</title>
     <link rel="stylesheet" type="text/css" href="../swagger-ui/dist/swagger-ui.css" />
     <link rel="stylesheet" type="text/css" href="index.css" />
     <link rel="icon" type="image/png" href="../swagger-ui/dist/favicon-32x32.png" sizes="32x32" />
